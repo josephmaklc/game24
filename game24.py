@@ -60,6 +60,20 @@ def game(goal, cardlist, n):
         else:
            return False
 
+  if (n == 2):
+        if (cardlist[0] + cardlist[1] == goal):
+            print ("%d + %d" % (cardlist[0], cardlist[1]), end="")
+            return True
+        if (cardlist[0] - cardlist[1] == goal):
+            print ("%d - %d" % (cardlist[0], cardlist[1]), end="")
+            return True
+        if (cardlist[0] * cardlist[1] == goal):
+            print ("%d * %d" % (cardlist[0], cardlist[1]), end="")
+            return True
+        if (cardlist[0] / cardlist[1] == goal):
+            print ("%d / %d" % (cardlist[0], cardlist[1]), end="")
+            return True
+        return False    
               	                       
   else:
     for i in range(n):
@@ -79,16 +93,16 @@ def game(goal, cardlist, n):
 
 
         if (game(toAdd,newlist,n-1)):
-            print(" + %d" % card, end=" ")
+            print(" + %d" % card, end="")
             return True
         if (game(toSub,newlist,n-1)):
-            print(" - %d" % card, end=" ")
+            print(" - %d" % card, end="")
             return True
         if (game(toMul,newlist,n-1)):
-            print(" * %d" % card, end=" ")
+            print(" * %d" % card, end="")
             return True
         if (game(toDiv,newlist,n-1)):
-            print(" / %d" % card, end=" ")
+            print(" / %d" % card, end="")
             return True
 	         
     return False  
