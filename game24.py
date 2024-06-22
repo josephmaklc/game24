@@ -24,11 +24,24 @@ import sys
 GOAL = 24
 NIL = -999
 
+def printUsage():
+    print("Game 24 - this program tries to find an arithmetic expression to reach %d" % GOAL)
+    print("Usage: pass 4 numbers in argument list. For example: ")
+    print(">python3 game24.py 2 3 4 8")
+
 def main():
     arguments = sys.argv.copy()
     arguments.pop(0)
-    cardlist = list(map(int,arguments))
+    try:
+        cardlist = list(map(int,arguments))
+    except:
+        printUsage()
+        return
+        
     NCARDS = len(cardlist)
+    if (NCARDS == 0):
+        printUsage()
+        return
     #print(cardlist)
     if (game(GOAL,cardlist,NCARDS)):
       print("\n")
@@ -36,7 +49,7 @@ def main():
       print("I don't know how to do this one.\n");
 
 def game(goal, cardlist, n):
-
+  #print("goal: %d cardlist: %s n %d" % (goal,str(cardlist),n))
   if (goal == NIL):
     return False;
 
@@ -46,6 +59,8 @@ def game(goal, cardlist, n):
            return True
         else:
            return False
+
+              	                       
   else:
     for i in range(n):
         card = cardlist[i];
@@ -76,7 +91,7 @@ def game(goal, cardlist, n):
             print(" / %d" % card, end=" ")
             return True
 	         
-        return False  
+    return False  
 
 if __name__ == "__main__":
     main()
