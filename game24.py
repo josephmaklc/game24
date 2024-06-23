@@ -1,8 +1,7 @@
 import sys
 
-# This programs tries to solve the "24 Game", you can use a deck of cards too.
-# The idea is to draw four cards with numbers from a pile and make an arithmetic expression using + - x /
-# to make 24.
+# This programs tries to solve the "24 Game", you can use a deck of cards to draw 4 cards too.
+# The idea is to make an arithmetic expression using + - x / from 4 numbers to make 24.
 #
 # I am using a recursive approach here. If you have just 1 card, you are solved instantly (or not able to solve)
 # If you have 2 cards, see if any of the 4 operations works.
