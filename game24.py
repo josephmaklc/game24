@@ -5,8 +5,8 @@ import sys
 # to make 24.
 #
 # I am using a recursive approach here. If you have just 1 card, you are solved instantly (or not able to solve)
-# If you have 2 cards, see if any of the 4 operation works.
-# If more than 2 cards, take one card out and make 4 smaller problems.
+# If you have 2 cards, see if any of the 4 operations works.
+# If more than 2 cards, take one card out and make 4 smaller problems with different goals.
 # For example if you are given the list of  2, 3, 4, 8. Take away first card (2). Now you have the list (3,4,8) but you
 # have 4 smaller problems, 
 # can you make 22 out of the 3 remaining cards? if so you can add the 2.
@@ -14,19 +14,16 @@ import sys
 # can you make 12 out of the 3 remaining cards? if so you can multiply the 2.
 # can you make 48 out of the 3 remaining cards? if so you can divide the 2.
 #
-# I know this approach does not solve all cases, but it works pretty well.
-#
 # To run, pass the list as arguments, separate by space
 #
 # For example:
 # python3 game24.py 2 3 4 8
 
 GOAL = 24
-NIL = -999
 
 def printUsage():
     print("Game 24 - this program tries to find an arithmetic expression to reach %d" % GOAL)
-    print("Usage: pass 4 numbers in argument list. For example: ")
+    print("Usage: pass 4 positive integers in argument list. For example: ")
     print(">python3 game24.py 2 3 4 8")
 
 def main():
@@ -35,6 +32,11 @@ def main():
     try:
         cardlist = list(map(int,arguments))
     except:
+        printUsage()
+        return
+        
+    # make sure all positive    
+    if (not all(a > 0 for a in cardlist)):
         printUsage()
         return
         
@@ -50,7 +52,7 @@ def main():
 
 def game(goal, cardlist, n):
   #print("goal: %d cardlist: %s n %d" % (goal,str(cardlist),n))
-  if (goal == NIL):
+  if (goal == None):
     return False;
 
   if (n == 1):
@@ -67,11 +69,16 @@ def game(goal, cardlist, n):
         if (cardlist[0] - cardlist[1] == goal):
             print ("%d - %d" % (cardlist[0], cardlist[1]), end="")
             return True
+        if (cardlist[1] - cardlist[0] == goal):
+            print ("%d - %d" % (cardlist[1], cardlist[0]), end="")
         if (cardlist[0] * cardlist[1] == goal):
             print ("%d * %d" % (cardlist[0], cardlist[1]), end="")
             return True
         if (cardlist[0] / cardlist[1] == goal):
             print ("%d / %d" % (cardlist[0], cardlist[1]), end="")
+            return True
+        if (cardlist[1] / cardlist[0] == goal):
+            print ("%d / %d" % (cardlist[1], cardlist[0]), end="")
             return True
         return False    
               	                       
@@ -88,7 +95,7 @@ def game(goal, cardlist, n):
         if (goal % card == 0):
             toMul = goal//card
         else:
-            toMul = NIL
+            toMul = None
         toDiv = goal * card
 
 
