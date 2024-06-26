@@ -39,20 +39,21 @@ def main():
         printUsage()
         return
         
-    NCARDS = len(cardlist)
-    if (NCARDS == 0):
+    size = len(cardlist)
+    if (size == 0):
         printUsage()
         return
     #print(cardlist)
-    if (game(GOAL,cardlist,NCARDS)):
+    if (game(GOAL,cardlist)):
       print("\n")
     else:
       print("I don't know how to do this one.\n");
 
-def game(goal, cardlist, n):
+def game(goal, cardlist):
   #print("goal: %d cardlist: %s n %d" % (goal,str(cardlist),n))
   if (goal == None):
     return False;
+  n = len(cardlist)
 
   if (n == 1):
         if (goal == cardlist[0]):
@@ -99,16 +100,16 @@ def game(goal, cardlist, n):
         toDiv = goal * card
 
 
-        if (game(toAdd,newlist,n-1)):
+        if (game(toAdd,newlist)):
             print(" + %d" % card, end="")
             return True
-        if (game(toSub,newlist,n-1)):
+        if (game(toSub,newlist)):
             print(" - %d" % card, end="")
             return True
-        if (game(toMul,newlist,n-1)):
+        if (game(toMul,newlist)):
             print(" * %d" % card, end="")
             return True
-        if (game(toDiv,newlist,n-1)):
+        if (game(toDiv,newlist)):
             print(" / %d" % card, end="")
             return True
 	         
