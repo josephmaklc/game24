@@ -81,9 +81,6 @@ def game(goal, cardlist):
         if (cardlist[0] * cardlist[1] == goal):
             print ("(%d * %d)" % (cardlist[0], cardlist[1]), end="")
             return True
-        if (cardlist[0] * cardlist[1] == -goal):
-            print ("- (%d * %d)" % (cardlist[0], cardlist[1]), end="")
-            return True
 
         #if (cardlist[0] / cardlist[1] == goal):
         if (checkDivide(cardlist[0],cardlist[1],goal)):
