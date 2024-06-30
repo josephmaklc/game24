@@ -49,10 +49,15 @@ def main():
     else:
       print("I don't know how to do this one.\n");
 
+def checkDivide(num,den,goal):
+    return round(num/den, 3) == round(goal, 3)
+    
 def game(goal, cardlist):
-  #print("goal: %d cardlist: %s n %d" % (goal,str(cardlist),n))
   if (goal == None):
+    print("goal: none, cardlist: %s" %str(cardlist))  
     return False;
+  #print("goal: %f cardlist: %s" % (goal,str(cardlist)))
+
   n = len(cardlist)
 
   if (n == 1):
@@ -63,6 +68,7 @@ def game(goal, cardlist):
            return False
 
   if (n == 2):
+        #print("goal %f two cards: %d %d" % (goal, cardlist[0],cardlist[1]))
         if (cardlist[0] + cardlist[1] == goal):
             print ("%d + %d" % (cardlist[0], cardlist[1]), end="")
             return True
@@ -75,12 +81,23 @@ def game(goal, cardlist):
         if (cardlist[0] * cardlist[1] == goal):
             print ("%d * %d" % (cardlist[0], cardlist[1]), end="")
             return True
-        if (cardlist[0] / cardlist[1] == goal):
+        #if (cardlist[0] / cardlist[1] == goal):
+        if (checkDivide(cardlist[0],cardlist[1],goal)):
             print ("%d / %d" % (cardlist[0], cardlist[1]), end="")
             return True
-        if (cardlist[1] / cardlist[0] == goal):
+        #if (cardlist[1] / cardlist[0] == goal):
+        if (checkDivide(cardlist[1],cardlist[0],goal)):
             print ("%d / %d" % (cardlist[1], cardlist[0]), end="")
             return True
+        if (checkDivide(cardlist[0],cardlist[1],-goal)):
+        #if ( (cardlist[0] / cardlist[1]) == -1*goal):
+            print ("- (%d / %d)" % (cardlist[0], cardlist[1]), end="")
+            return True
+        if (checkDivide(cardlist[1],cardlist[0],-goal)):
+        #if ( (cardlist[1] / cardlist[0]) == -1*goal):
+            print ("- (%d / %d)" % (cardlist[1], cardlist[0]), end="")
+            return True
+
         return False    
               	                       
   else:
@@ -92,11 +109,7 @@ def game(goal, cardlist):
 
         toAdd = goal - card;
         toSub = goal + card;
-        #toMul = (goal % card == 0) ? goal/card : NIL;
-        if (goal % card == 0):
-            toMul = goal//card
-        else:
-            toMul = None
+        toMul = goal/card
         toDiv = goal * card
 
 
