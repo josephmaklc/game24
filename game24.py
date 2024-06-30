@@ -35,9 +35,9 @@ def main():
         return
         
     # make sure all positive    
-    if (not all(a > 0 for a in cardlist)):
-        printUsage()
-        return
+    #if (not all(a > 0 for a in cardlist)):
+    #    printUsage()
+    #    return
         
     size = len(cardlist)
     if (size == 0):
@@ -70,24 +70,28 @@ def game(goal, cardlist):
   if (n == 2):
         #print("goal %f two cards: %d %d" % (goal, cardlist[0],cardlist[1]))
         if (cardlist[0] + cardlist[1] == goal):
-            print ("%d + %d" % (cardlist[0], cardlist[1]), end="")
+            print ("(%d + %d)" % (cardlist[0], cardlist[1]), end="")
             return True
         if (cardlist[0] - cardlist[1] == goal):
-            print ("%d - %d" % (cardlist[0], cardlist[1]), end="")
+            print ("(%d - %d)" % (cardlist[0], cardlist[1]), end="")
             return True
         if (cardlist[1] - cardlist[0] == goal):
-            print ("%d - %d" % (cardlist[1], cardlist[0]), end="")
+            print ("(%d - %d)" % (cardlist[1], cardlist[0]), end="")
             return True
         if (cardlist[0] * cardlist[1] == goal):
-            print ("%d * %d" % (cardlist[0], cardlist[1]), end="")
+            print ("(%d * %d)" % (cardlist[0], cardlist[1]), end="")
             return True
+        if (cardlist[0] * cardlist[1] == -goal):
+            print ("- (%d * %d)" % (cardlist[0], cardlist[1]), end="")
+            return True
+
         #if (cardlist[0] / cardlist[1] == goal):
         if (checkDivide(cardlist[0],cardlist[1],goal)):
-            print ("%d / %d" % (cardlist[0], cardlist[1]), end="")
+            print ("(%d / %d)" % (cardlist[0], cardlist[1]), end="")
             return True
         #if (cardlist[1] / cardlist[0] == goal):
         if (checkDivide(cardlist[1],cardlist[0],goal)):
-            print ("%d / %d" % (cardlist[1], cardlist[0]), end="")
+            print ("(%d / %d)" % (cardlist[1], cardlist[0]), end="")
             return True
         if (checkDivide(cardlist[0],cardlist[1],-goal)):
         #if ( (cardlist[0] / cardlist[1]) == -1*goal):
@@ -99,7 +103,7 @@ def game(goal, cardlist):
             return True
 
         return False    
-              	                       
+                                         
   else:
     for i in range(n):
         card = cardlist[i];
@@ -125,7 +129,7 @@ def game(goal, cardlist):
         if (game(toDiv,newlist)):
             print(" / %d" % card, end="")
             return True
-	         
+             
     return False  
 
 if __name__ == "__main__":
